@@ -1,12 +1,8 @@
-/**/.DS_Store
-/logs/
-/dubbo/
-/**/*.iml
-/**/test/**/*.java
-
+HELP.md
 target/
-data/
 !.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
 
 ### STS ###
 .apt_generated
@@ -15,6 +11,7 @@ data/
 .project
 .settings
 .springBeans
+.sts4-cache
 
 ### IntelliJ IDEA ###
 .idea
@@ -23,18 +20,34 @@ data/
 *.ipr
 
 ### NetBeans ###
-nbproject/private/
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
 build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### VS Code ###
+.vscode/
+
+
+
+/**/.DS_Store
+/logs/
+/dubbo/
+/**/*.iml
+/**/test/**/*.java
+
+
 nbbuild/
 dist/
 nbdist/
 
 
 .nb-gradle/
-.settings
-.classpath
-.project
-.springBeans
+
 mvnw
 mvnw.cmd
 .mvn
