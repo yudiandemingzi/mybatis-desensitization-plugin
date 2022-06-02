@@ -44,7 +44,7 @@ public enum SensitiveTypeEnums {
     /**
      * 邮箱
      */
-    EMAIL(1,4),
+    EMAIL(2,0),
 
     /**
      * 地址
