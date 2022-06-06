@@ -37,14 +37,4 @@ public class FixedPhoneStrategyHandle implements SensitiveStrategy {
         //座机脱敏
         return this.rightFill(value, fillValue);
     }
-
-
-    public static void main(String[] args) {
-
-        final FixedPhoneStrategyHandle mobileStrategyHandle = new FixedPhoneStrategyHandle();
-        final String handle = mobileStrategyHandle.handle("0211-87118822", "*");
-        System.out.println("s = " + handle);
-
-
-    }
 }

@@ -41,10 +41,4 @@ public class AddressStrategyHandle implements SensitiveStrategy {
         return value;
     }
 
-    public static void main(String[] args) {
-
-        final AddressStrategyHandle mobileStrategyHandle = new AddressStrategyHandle();
-        final String handle = mobileStrategyHandle.handle("宁波市慈溪市观海卫镇禹皇路999号鸣鹤古镇", "*");
-        System.out.println("s = " + handle);
-    }
 }

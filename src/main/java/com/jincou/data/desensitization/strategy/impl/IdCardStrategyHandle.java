@@ -37,14 +37,4 @@ public class IdCardStrategyHandle implements SensitiveStrategy {
         //身份证号脱敏
         return this.rightFill(value, fillValue);
     }
-
-
-    public static void main(String[] args) {
-
-        final IdCardStrategyHandle mobileStrategyHandle = new IdCardStrategyHandle();
-        final String handle = mobileStrategyHandle.handle("33012799004295210", "*");
-        System.out.println("s = " + handle);
-
-
-    }
 }
