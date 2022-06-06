@@ -7,11 +7,14 @@
         <id column="id" property="id" />
         <result column="age" property="age" />
         <result column="name" property="name" />
+        <result column="email" property="email" />
+        <result column="mobile" property="mobile" />
+        <result column="address" property="address" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, age, name
+        id, age, name,email,mobile,address
     </sql>
 
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -20,5 +23,12 @@
         from user
         where id = #{id,jdbcType=INTEGER}
     </select>
+
+    <select id="findAllUser"  resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from user
+    </select>
+
 
 </mapper>

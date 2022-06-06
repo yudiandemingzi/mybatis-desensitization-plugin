@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<packaging>pom</packaging>
 	<modules>
-		<module>mybatis-sensitive-plugin-core</module>
+		<module>mybatis-sensitive-plugin-starter</module>
 		<module>mybatis-sensitive-test</module>
 	</modules>
 	<parent>
@@ -15,7 +15,7 @@
 	</parent>
 	<groupId>com.jincou</groupId>
 	<artifactId>mybatis-desensitization-plugin</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<name>mybatis-data-desensitization</name>
 	<description>通过mybatis插件的方式实现数据脱敏</description>
 	<properties>

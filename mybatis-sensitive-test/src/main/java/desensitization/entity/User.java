@@ -42,5 +42,23 @@ public class User implements Serializable {
     @SensitiveField(SensitiveTypeEnums.CHINESE_NAME)
     private String name;
 
+    /**
+     * 邮箱
+     */
+    @SensitiveField(SensitiveTypeEnums.EMAIL)
+    private String email;
+
+    /**
+     * 手机号
+     */
+    @SensitiveField(SensitiveTypeEnums.MOBILE)
+    private String mobile;
+
+    /**
+     * 地址
+     */
+    @SensitiveField(SensitiveTypeEnums.ADDRESS)
+    private String address;
+
 
 }
