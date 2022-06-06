@@ -1,7 +1,5 @@
 package desensitization.enums;
 
-
-
 /**
  * 脱敏类型
  *
@@ -56,16 +54,15 @@ public enum SensitiveTypeEnums {
         this.begin = begin;
         this.end = end;
     };
+
     /**
      * 开始长度
      */
-
     private int begin;
 
     /**
      * 结束长度
      */
-
     private int end;
 
     public int getBegin() {

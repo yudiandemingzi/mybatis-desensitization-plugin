@@ -1,24 +1,19 @@
 package desensitization.plugin;
 
-
-
 import desensitization.annotation.SensitiveField;
 import desensitization.enums.SensitiveTypeEnums;
 import desensitization.strategy.SensitiveContext;
 import desensitization.strategy.SensitiveStrategy;
-
 import org.apache.ibatis.executor.resultset.ResultSetHandler;
 import org.apache.ibatis.plugin.*;
 import org.reflections.ReflectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
 import java.lang.reflect.Field;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.function.Predicate;
 
 
 /**
@@ -30,7 +25,6 @@ import java.util.function.Predicate;
 @Intercepts({
         @Signature(type = ResultSetHandler.class, method = "handleResultSets", args = {java.sql.Statement.class})
 })
-@Component
 public class DesensitizationInterceptor implements Interceptor {
 
     private static final Logger log = LoggerFactory.getLogger(DesensitizationInterceptor.class);
@@ -49,16 +43,11 @@ public class DesensitizationInterceptor implements Interceptor {
         if (CollectionUtils.isEmpty(results)) {
             return results;
         }
-
-
-        // 批量设置id
+        // 批量设置加密
         for (Object object : results) {
             process(object);
         }
-
-
         return results;
-
     }
 
 
@@ -66,7 +55,7 @@ public class DesensitizationInterceptor implements Interceptor {
         Class handlerKey = object.getClass();
         List<Handler> handlerList = handlerMap.get(handlerKey);
 
-        //TODO 性能优化点，如果有两个都是user对象同时,那么只需有个进行反射处理属性就好了,另一个只需执行下面的for循环
+        //性能优化点，如果有两个都是user对象同时,那么只需有个进行反射处理属性就好了,另一个只需执行下面的for循环
         SYNC:
         if (handlerList == null) {
             synchronized (this) {
@@ -79,11 +68,10 @@ public class DesensitizationInterceptor implements Interceptor {
                 // 反射工具类 获取带有SensitiveField注解的所有属性字段
                 Set<Field> allFields = ReflectionUtils.getAllFields(
                         object.getClass(),
-                        (com.google.common.base.Predicate<Field>) input -> input != null && input.getAnnotation(SensitiveField.class) != null
+                        input -> input != null && input.getAnnotation(SensitiveField.class) != null
                 );
 
                 for (Field field : allFields) {
-                    SensitiveField annotation = field.getAnnotation(SensitiveField.class);
                     handlerList.add(new Handler(field));
                 }
             }
@@ -92,7 +80,6 @@ public class DesensitizationInterceptor implements Interceptor {
             handler.accept(object);
         }
     }
-
 
 
     @Override
@@ -122,17 +109,16 @@ public class DesensitizationInterceptor implements Interceptor {
 
         public void accept(Object o) throws Throwable {
             if (checkField(o, field)) {
-
                 SensitiveField annotation = field.getAnnotation(SensitiveField.class);
-                SensitiveTypeEnums value = annotation.value();
+                SensitiveTypeEnums typeEnums = annotation.value();
                 String fillValue = annotation.fillValue();
                 Object o1 = field.get(o);
-                SensitiveStrategy sensitiveStrategy = SensitiveContext.get(value);
+                log.info("加密之前数据 = {}",o1);
+                SensitiveStrategy sensitiveStrategy = SensitiveContext.get(typeEnums);
                 String s = sensitiveStrategy.handle(o1, fillValue);
-
+                log.info("加密之后数据 = {}",s);
                 field.set(o, s);
             }
         }
     }
-
 }

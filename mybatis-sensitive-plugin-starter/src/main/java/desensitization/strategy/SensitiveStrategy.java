@@ -18,7 +18,6 @@ public interface SensitiveStrategy {
      */
     SensitiveTypeEnums getType();
 
-
     /**
      * 默认处理具体脱敏方法，如果特色子类 由子类实现
      *
@@ -27,9 +26,6 @@ public interface SensitiveStrategy {
      * @return 已经脱敏后的数据
      */
     String handle(Object object, String fillValue);
-
-
-
 
 
 //===========================接口默认方法，把实现类公共部分抽离出来==========================================================

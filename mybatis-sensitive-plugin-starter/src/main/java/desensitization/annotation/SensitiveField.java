@@ -1,9 +1,7 @@
 package desensitization.annotation;
 
 import desensitization.enums.SensitiveTypeEnums;
-
 import java.lang.annotation.*;
-
 
 /**
  * 对需要脱敏的字段加上该注解
