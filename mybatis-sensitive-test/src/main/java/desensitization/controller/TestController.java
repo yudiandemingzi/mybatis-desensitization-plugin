@@ -27,6 +27,4 @@ public class TestController {
      return  userMapper.findAllUser();
     }
 
-
-
 }
